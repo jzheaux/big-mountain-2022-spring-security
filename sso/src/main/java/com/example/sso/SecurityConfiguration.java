@@ -50,11 +50,6 @@ import static org.springframework.beans.factory.config.BeanDefinition.ROLE_INFRA
 public class SecurityConfiguration {
 
 	@Bean
-	WebSecurityCustomizer ignore() {
-		return (web) -> web.ignoring().mvcMatchers("/css/**", "/images/**");
-	}
-
-	@Bean
 	@Order(1)
 	public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
 		OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
@@ -71,9 +66,10 @@ public class SecurityConfiguration {
 		// @formatter:off
 		http
 			.authorizeHttpRequests((authorize) -> authorize
-				.requestMatchers("/login").permitAll()
+				.requestMatchers("/login", "/css/**", "/images/**").permitAll()
 				.anyRequest().authenticated()
 			)
+			.securityContext((context) -> context.requireExplicitSave(true))
 			.formLogin((form) -> form.loginPage("/login"));
 		// @formatter:on
 
