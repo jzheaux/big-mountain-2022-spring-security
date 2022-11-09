@@ -19,9 +19,9 @@ public class SecurityConfiguration {
 		// @formatter:off
 		http
 			.authorizeHttpRequests((authz) -> authz
-				.mvcMatchers("/flights/all").access(allOf(named("josh"), hasAuthority("SCOPE_flights:read")))
-				.mvcMatchers("/flights/*/take-off").access(allOf(named("josh"), hasAuthority("SCOPE_flights:read")))
-				.mvcMatchers("/flights").hasAuthority("SCOPE_flights:read")
+				.requestMatchers("/flights/all").access(allOf(named("josh"), hasAuthority("SCOPE_flights:read")))
+				.requestMatchers("/flights/*/take-off").access(allOf(named("josh"), hasAuthority("SCOPE_flights:read")))
+				.requestMatchers("/flights").hasAuthority("SCOPE_flights:read")
 				.anyRequest().hasAuthority("SCOPE_flights:write")
 			)
 			.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt);
