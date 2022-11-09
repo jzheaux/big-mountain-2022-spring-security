@@ -71,7 +71,7 @@ public class SecurityConfiguration {
 		// @formatter:off
 		http
 			.authorizeHttpRequests((authorize) -> authorize
-				.mvcMatchers("/login").permitAll()
+				.requestMatchers("/login").permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form.loginPage("/login"));
