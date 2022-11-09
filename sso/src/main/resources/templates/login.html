@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <link rel="stylesheet" href="/static/css/main.css" th:href="@{/css/main.css}"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta charset="utf-8"/>
+        <title>Sign in</title>
+    </head>
+    <body>
+        <div style="display: grid; width: 1200px; margin: 200px auto; grid-template-columns: auto auto auto;">
+            <span class="side-image"></span>
+            <div class="main">
+                <p class="sign" align="center">Sign in</p>
+                <form th:action="@{/login}" method="post" class="form1">
+                    <label>
+                        <input class="un" type="text" id="username" name="username" align="center" placeholder="Username" autofocus>
+                    </label>
+                    <label>
+                        <input class="pass" type="password" id="password" name="password" align="center" placeholder="Password">
+                    </label>
+                    <input type="submit" class="submit" value="Sign in"/>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+
