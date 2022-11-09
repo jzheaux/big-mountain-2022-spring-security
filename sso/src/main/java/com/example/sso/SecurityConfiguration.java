@@ -134,7 +134,12 @@ public class SecurityConfiguration {
 
 	@Bean
 	PasswordEncoder passwordEncoder() {
-		return new Pbkdf2PasswordEncoder();
+		PasswordEncoder previous = Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_5();
+		PasswordEncoder next = Pbkdf2PasswordEncoder.defaultsForSpringSecurity_v5_8();
+		String prefix = "pbkdf2@5.8";
+		DelegatingPasswordEncoder encoder = new DelegatingPasswordEncoder(prefix, Map.of(prefix, next));
+		encoder.setDefaultPasswordEncoderForMatches(previous);
+		return encoder;
 	}
 
 	@Bean
