@@ -6,6 +6,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 
+import static com.example.api.IsNameAuthorizationManager.named;
+import static org.springframework.security.authorization.AuthorityAuthorizationManager.hasAuthority;
+import static org.springframework.security.authorization.AuthorizationManagers.allOf;
+
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -13,9 +17,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		// @formatter:off
 		http
-			.authorizeRequests((authz) -> authz
-				.mvcMatchers("/flights/all").access("@authz.all(#root)")
-				.mvcMatchers("/flights/*/take-off").access("@authz.takeoff(#root)")
+			.authorizeHttpRequests((authz) -> authz
+				.mvcMatchers("/flights/all").access(allOf(named("josh"), hasAuthority("SCOPE_flights:read")))
+				.mvcMatchers("/flights/*/take-off").access(allOf(named("josh"), hasAuthority("SCOPE_flights:read")))
 				.mvcMatchers("/flights").hasAuthority("SCOPE_flights:read")
 				.anyRequest().hasAuthority("SCOPE_flights:write")
 			)
