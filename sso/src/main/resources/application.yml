@@ -8,3 +8,9 @@ logging:
 spring:
   thymeleaf:
     cache: false
+  security:
+    saml2:
+      relyingparty:
+        registration:
+          one:
+            assertingparty.metadata-uri: https://dev-70721243.okta.com/app/exk77cezamkQoJbXU5d7/sso/saml/metadata

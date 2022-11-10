@@ -55,7 +55,7 @@ public class SecurityConfiguration {
 		OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
 		http
 			.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-			.formLogin((form) -> form.loginPage("/login"))
+			.saml2Login(Customizer.withDefaults())
 			.getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(Customizer.withDefaults());
 		return http.build();
 	}
@@ -66,11 +66,11 @@ public class SecurityConfiguration {
 		// @formatter:off
 		http
 			.authorizeHttpRequests((authorize) -> authorize
-				.requestMatchers("/login", "/css/**", "/images/**").permitAll()
+				.requestMatchers("/css/**", "/images/**").permitAll()
 				.anyRequest().authenticated()
 			)
 			.securityContext((context) -> context.requireExplicitSave(true))
-			.formLogin((form) -> form.loginPage("/login"));
+			.saml2Login(Customizer.withDefaults());
 		// @formatter:on
 
 		return http.build();
