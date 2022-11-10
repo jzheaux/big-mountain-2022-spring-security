@@ -11,15 +11,22 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 repositories {
+	mavenLocal()
 	mavenCentral()
 	maven { url 'https://repo.spring.io/release' }
 	maven { url 'https://repo.spring.io/milestone' }
 }
 
+ext["spring-security.version"] = "6.0.0-SNAPSHOT"
+
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+	implementation 'io.micrometer:micrometer-tracing:1.0.0-RC1'
+	implementation 'io.micrometer:micrometer-tracing-bridge-brave:1.0.0-RC1'
+	implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
 	runtimeOnly 'com.h2database:h2'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'

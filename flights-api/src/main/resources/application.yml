@@ -11,3 +11,6 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://auth-server:9000
+
+management.endpoints.web.exposure.include: metrics, loggers
+management.tracing.sampling.probability: 1.0
