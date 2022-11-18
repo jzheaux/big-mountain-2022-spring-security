@@ -15,10 +15,10 @@ import { GatewayInterceptor } from './interceptors/gateway.interceptor';
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    HttpClientXsrfModule.withOptions({
+    HttpClientXsrfModule/*.withOptions({
       cookieName: 'CSRF-TOKEN',
       headerName: 'X-CSRF-TOKEN'
-    }),
+    })*/,
     AppRoutingModule,
   ],
   providers: [

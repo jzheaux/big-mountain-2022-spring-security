@@ -19,9 +19,9 @@ public class CsrfCookieWebFilter implements WebFilter {
 		String key = CsrfToken.class.getName();
 		Mono<CsrfToken> csrfToken = null != exchange.getAttribute(key) ? exchange.getAttribute(key) : Mono.empty();
 		return csrfToken.doOnSuccess(token -> {
-			ResponseCookie cookie = ResponseCookie.from("CSRF-TOKEN", token.getToken()).maxAge(Duration.ofHours(1))
+			ResponseCookie cookie = ResponseCookie.from("XSRF-TOKEN", token.getToken()).maxAge(Duration.ofHours(1))
 					.httpOnly(false).path("/").sameSite(Cookie.SameSite.LAX.attributeValue()).build();
-			exchange.getResponse().getCookies().add("CSRF-TOKEN", cookie);
+			exchange.getResponse().getCookies().add("XSRF-TOKEN", cookie);
 		}).then(chain.filter(exchange));
 	}
 }
