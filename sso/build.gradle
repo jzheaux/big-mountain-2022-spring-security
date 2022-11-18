@@ -15,7 +15,6 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.security:spring-security-oauth2-authorization-server:1.0.0-RC1'
-	implementation 'org.springframework.security:spring-security-saml2-service-provider'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity6'

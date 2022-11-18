@@ -55,7 +55,7 @@ public class SecurityConfiguration {
 		OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
 		http
 			.oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-			.saml2Login(Customizer.withDefaults())
+			.formLogin(Customizer.withDefaults())
 			.getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(Customizer.withDefaults());
 		return http.build();
 	}
@@ -70,7 +70,7 @@ public class SecurityConfiguration {
 				.anyRequest().authenticated()
 			)
 			.securityContext((context) -> context.requireExplicitSave(true))
-			.saml2Login(Customizer.withDefaults());
+			.formLogin(Customizer.withDefaults());
 		// @formatter:on
 
 		return http.build();
